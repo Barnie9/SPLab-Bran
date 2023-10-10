@@ -1,4 +1,4 @@
-package app.controller;
+package app.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.servlet.error.ErrorController;
