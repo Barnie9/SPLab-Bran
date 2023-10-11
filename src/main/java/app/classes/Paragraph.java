@@ -1,6 +1,6 @@
 package app.classes;
 
-public class Paragraph {
+public class Paragraph implements Element{
 
     private String text;
 

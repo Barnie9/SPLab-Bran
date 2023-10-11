@@ -1,6 +1,6 @@
 package app.classes;
 
-public class Image {
+public class Image implements Element{
 
     private String imageName;
 
