@@ -11,4 +11,8 @@ public class Paragraph implements Element{
     public void print() {
         System.out.println("\t\t\tParagraph: " + this.text);
     }
+
+    public int getSortIndex() {
+        return 1;
+    }
 }

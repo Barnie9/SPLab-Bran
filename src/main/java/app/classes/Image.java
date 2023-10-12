@@ -11,4 +11,8 @@ public class Image implements Element{
     public void print() {
         System.out.println("\t\t\tImage with name: " + this.imageName);
     }
+
+    public int getSortIndex() {
+        return 2;
+    }
 }

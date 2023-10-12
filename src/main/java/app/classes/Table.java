@@ -11,4 +11,8 @@ public class Table implements Element{
     public void print() {
         System.out.println("\t\t\tTable with title: " + this.title);
     }
+
+    public int getSortIndex() {
+        return 3;
+    }
 }

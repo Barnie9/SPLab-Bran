@@ -1,6 +1,7 @@
 package app.classes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SubChapter {
@@ -14,15 +15,26 @@ public class SubChapter {
     }
 
     public void createNewParagraph(String text) {
-        elementList.add(new Paragraph(text));
+        addElement(new Paragraph(text));
     }
 
     public void createNewImage(String imageName) {
-        elementList.add(new Image(imageName));
+        addElement(new Image(imageName));
     }
 
     public void createNewTable(String title) {
-        elementList.add(new Table(title));
+        addElement(new Table(title));
+    }
+
+    public void addElement(Element element) {
+        elementList.add(element);
+
+        elementList.sort(new Comparator<Element>() {
+            @Override
+            public int compare(Element el1, Element el2) {
+                return el1.getSortIndex() - el2.getSortIndex();
+            }
+        });
     }
 
     public void print() {
