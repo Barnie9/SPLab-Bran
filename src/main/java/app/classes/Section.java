@@ -16,6 +16,7 @@ public class Section extends Element {
         elementList = new ArrayList<>();
     }
 
+    @Override
     public void add(Element element) throws Exception {
         if (element.getParent() == null) {
             element.setParent(this);
