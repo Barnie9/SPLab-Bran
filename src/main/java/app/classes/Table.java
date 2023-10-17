@@ -1,6 +1,6 @@
 package app.classes;
 
-public class Table implements Element{
+public class Table extends Element {
 
     private String title;
 

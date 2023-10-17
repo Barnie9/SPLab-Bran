@@ -1,6 +1,6 @@
 package app.classes;
 
-public class Image implements Element{
+public class Image extends Element {
 
     private String imageName;
 

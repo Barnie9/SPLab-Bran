@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpLabApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // SpringApplication.run(SpLabApplication.class, args);
 
         Book noapteBuna = new Book("Noapte buna, copii!");
@@ -20,6 +20,7 @@ public class SpLabApplication {
 
         noapteBuna.addContent(new Paragraph("Multumesc celor care ..."));
         noapteBuna.addContent(cap1);
+
         cap1.add(new Paragraph("Moto capitol"));
         cap1.add(cap11);
         cap11.add(new Paragraph("Text from subchapter 1.1"));

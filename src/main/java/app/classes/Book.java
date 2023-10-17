@@ -3,7 +3,7 @@ package app.classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book extends Section{
+public class Book extends Section {
 
     private List<Author> authorList;
 
@@ -17,7 +17,11 @@ public class Book extends Section{
     }
 
     public void addContent(Element element) {
-        super.add(element);
+        try {
+            super.add(element);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void print() {

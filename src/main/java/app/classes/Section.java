@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element{
+public class Section extends Element {
 
     @Getter
     private String title;
@@ -16,13 +16,19 @@ public class Section implements Element{
         elementList = new ArrayList<>();
     }
 
-    public void add(Element element) {
-        elementList.add(element);
+    public void add(Element element) throws Exception {
+        if (element.getParent() == null) {
+            element.setParent(this);
+            elementList.add(element);
+        } else {
+            throw new Exception("Element already exist!");
+        }
     }
 
     @Override
     public void remove(Element element) {
         elementList.remove(element);
+        element.setParent(null);
     }
 
     @Override
