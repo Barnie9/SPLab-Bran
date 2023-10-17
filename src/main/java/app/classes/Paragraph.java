@@ -9,10 +9,22 @@ public class Paragraph implements Element{
     }
 
     public void print() {
-        System.out.println("\t\t\tParagraph: " + this.text);
+        System.out.println("Paragraph: " + this.text);
     }
 
-    public int getSortIndex() {
-        return 1;
+    @Override
+    public void add(Element element) {
+
     }
+
+    @Override
+    public void remove(Element element) {
+
+    }
+
+    @Override
+    public Element get(int index) {
+        return null;
+    }
+
 }

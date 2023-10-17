@@ -9,10 +9,22 @@ public class Table implements Element{
     }
 
     public void print() {
-        System.out.println("\t\t\tTable with title: " + this.title);
+        System.out.println("Table with title: " + this.title);
     }
 
-    public int getSortIndex() {
-        return 3;
+    @Override
+    public void add(Element element) {
+
     }
+
+    @Override
+    public void remove(Element element) {
+
+    }
+
+    @Override
+    public Element get(int index) {
+        return null;
+    }
+
 }

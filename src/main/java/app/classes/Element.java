@@ -3,5 +3,7 @@ package app.classes;
 public interface Element {
 
     void print();
-    int getSortIndex();
+    void add(Element element);
+    void remove(Element element);
+    Element get(int index);
 }
