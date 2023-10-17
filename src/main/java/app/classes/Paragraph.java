@@ -1,6 +1,6 @@
 package app.classes;
 
-public class Paragraph implements Element{
+public class Paragraph extends Element {
 
     private String text;
 
@@ -9,10 +9,6 @@ public class Paragraph implements Element{
     }
 
     public void print() {
-        System.out.println("\t\t\tParagraph: " + this.text);
-    }
-
-    public int getSortIndex() {
-        return 1;
+        System.out.println("Paragraph: " + this.text);
     }
 }

@@ -1,6 +1,6 @@
 package app.classes;
 
-public class Table implements Element{
+public class Table extends Element {
 
     private String title;
 
@@ -9,10 +9,6 @@ public class Table implements Element{
     }
 
     public void print() {
-        System.out.println("\t\t\tTable with title: " + this.title);
-    }
-
-    public int getSortIndex() {
-        return 3;
+        System.out.println("Table with title: " + this.title);
     }
 }

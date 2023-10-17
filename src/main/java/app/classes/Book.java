@@ -3,45 +3,40 @@ package app.classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book extends Section {
 
-    private String title;
     private List<Author> authorList;
-    private List<Chapter> chapterList;
 
     public Book(String title) {
-        this.title = title;
+        super(title);
         this.authorList = new ArrayList<>();
-        this.chapterList = new ArrayList<>();
     }
 
     public void addAuthor(Author author) {
         authorList.add(author);
     }
 
-    public int createChapter(String name) {
-        Chapter chapter = new Chapter(name);
-        chapterList.add(chapter);
-        return chapterList.indexOf(chapter);
-    }
-
-    public Chapter getChapter(int index) {
-        return chapterList.get(index);
+    public void addContent(Element element) {
+        try {
+            super.add(element);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void print() {
-        System.out.println("Book: " + this.title);
+        System.out.println("Book: " + super.getTitle());
+        System.out.println();
         if (!authorList.isEmpty()) {
-            System.out.print("Authors: ");
+            System.out.println("Authors: ");
             authorList.get(0).print();
             for (int i = 1; i < authorList.size(); i++) {
-                System.out.print(", ");
                 authorList.get(i).print();
             }
             System.out.println();
         }
-        for (Chapter chapter : chapterList) {
-            chapter.print();
+        for (Element element : super.elementList) {
+            element.print();
         }
     }
 }

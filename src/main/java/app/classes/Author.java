@@ -9,6 +9,6 @@ public class Author {
     }
 
     public void print() {
-        System.out.print(this.name);
+        System.out.println("Author: " + this.name);
     }
 }
