@@ -2,7 +2,7 @@ package app.classes;
 
 import java.util.concurrent.TimeUnit;
 
-public class Image extends Element {
+public class Image extends Element implements Picture {
 
     private String imageName;
 
