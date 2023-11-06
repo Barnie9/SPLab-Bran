@@ -13,14 +13,14 @@ public class Section extends Element {
 
     public Section(String title) {
         this.title = title;
-        elementList = new ArrayList<>();
+        this.elementList = new ArrayList<>();
     }
 
     @Override
     public void add(Element element) throws Exception {
         if (element.getParent() == null) {
             element.setParent(this);
-            elementList.add(element);
+            this.elementList.add(element);
         } else {
             throw new Exception("Element already exist!");
         }
@@ -28,18 +28,18 @@ public class Section extends Element {
 
     @Override
     public void remove(Element element) {
-        elementList.remove(element);
+        this.elementList.remove(element);
         element.setParent(null);
     }
 
     @Override
     public Element get(int index) {
-        return elementList.get(index);
+        return this.elementList.get(index);
     }
 
     public void print() {
         System.out.println(this.title);
-        for (Element element : elementList) {
+        for (Element element : this.elementList) {
             element.print();
         }
     }

@@ -1,6 +1,11 @@
 package app;
 
 import app.classes.*;
+import app.classes.images.ImageProxy;
+import app.classes.paragraphs.AlignCenter;
+import app.classes.paragraphs.AlignLeft;
+import app.classes.paragraphs.AlignRight;
+import app.classes.paragraphs.Paragraph;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -31,6 +36,9 @@ public class SpLabApplication {
         System.out.println("Printing with Alignment");
         System.out.println();
         cap1.print();
+
+//        ImageProxy imageProxy = new ImageProxy("Alex.jpg", 12, 6);
+//        imageProxy.print();
     }
 
 }

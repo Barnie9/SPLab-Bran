@@ -1,4 +1,4 @@
-package app.classes;
+package app.classes.paragraphs;
 
 public class AlignLeft implements AlignStrategy {
 

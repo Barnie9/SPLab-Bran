@@ -1,4 +1,6 @@
-package app.classes;
+package app.classes.paragraphs;
+
+import app.classes.Element;
 
 public class Paragraph extends Element {
 
@@ -7,7 +9,7 @@ public class Paragraph extends Element {
 
     public Paragraph(String text) {
         this.text = text;
-        alignStrategy = null;
+        this.alignStrategy = null;
     }
 
     public void setAlignStrategy(AlignStrategy alignStrategy) {
@@ -15,8 +17,8 @@ public class Paragraph extends Element {
     }
 
     public void print() {
-        if (alignStrategy != null) {
-            alignStrategy.render("Paragraph: " + this.text);
+        if (this.alignStrategy != null) {
+            this.alignStrategy.render("Paragraph: " + this.text);
         } else {
             System.out.println("Paragraph: " + this.text);
         }

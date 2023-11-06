@@ -1,4 +1,4 @@
-package app.classes;
+package app.classes.images;
 
 public interface Picture {
 

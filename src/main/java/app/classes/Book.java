@@ -13,7 +13,7 @@ public class Book extends Section {
     }
 
     public void addAuthor(Author author) {
-        authorList.add(author);
+        this.authorList.add(author);
     }
 
     public void addContent(Element element) {
@@ -27,11 +27,11 @@ public class Book extends Section {
     public void print() {
         System.out.println("Book: " + super.getTitle());
         System.out.println();
-        if (!authorList.isEmpty()) {
+        if (!this.authorList.isEmpty()) {
             System.out.println("Authors: ");
-            authorList.get(0).print();
-            for (int i = 1; i < authorList.size(); i++) {
-                authorList.get(i).print();
+            this.authorList.get(0).print();
+            for (int i = 1; i < this.authorList.size(); i++) {
+                this.authorList.get(i).print();
             }
             System.out.println();
         }
