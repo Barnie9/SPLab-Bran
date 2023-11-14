@@ -34,9 +34,13 @@ public class SpLabApplication {
         b.addContent(cap1);
         b.addContent(cap2);
 
-        TableOfContentUpdate tocUpdate = new TableOfContentUpdate();
-        b.accept(tocUpdate);
-        tocUpdate.getToC().accept(new RenderContentVisitor());
+        BookSaveVisitor bookSaveVisitor = new BookSaveVisitor();
+        b.accept(bookSaveVisitor);
+        bookSaveVisitor.exportJSON();
+
+//        TableOfContentUpdate tocUpdate = new TableOfContentUpdate();
+//        b.accept(tocUpdate);
+//        tocUpdate.getToC().accept(new RenderContentVisitor());
     }
 
 }
