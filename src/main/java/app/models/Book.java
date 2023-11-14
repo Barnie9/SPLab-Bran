@@ -1,4 +1,4 @@
-package app.classes;
+package app.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,13 @@ public class Book extends Section {
             super.add(element);
         } catch (Exception exception) {
             exception.printStackTrace();
+        }
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visitBook(this);
+        for (Element element : super.elementList) {
+            element.accept(visitor);
         }
     }
 

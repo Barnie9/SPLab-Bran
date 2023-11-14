@@ -1,4 +1,6 @@
-package app.classes.images;
+package app.services;
+
+import app.models.ImageContent;
 
 public class ImageLoaderFactory {
 

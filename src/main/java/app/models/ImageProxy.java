@@ -1,9 +1,10 @@
-package app.classes.images;
+package app.models;
 
-import app.classes.Element;
+import lombok.Getter;
 
 public class ImageProxy extends Element implements Picture {
 
+    @Getter
     private String url;
     private Dimension dimension;
     private Image realImage;
@@ -19,6 +20,11 @@ public class ImageProxy extends Element implements Picture {
             this.realImage = new Image(this.url);
         }
         return this.realImage;
+    }
+
+    public void accept(Visitor visitor) {
+        // this.loadImage();
+        visitor.visitImageProxy(this);
     }
 
     public void print() {

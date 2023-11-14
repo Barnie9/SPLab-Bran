@@ -1,4 +1,4 @@
-package app.classes;
+package app.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +15,5 @@ public abstract class Element {
     Element get(int index) {
         return null;
     }
+    abstract void accept(Visitor visitor);
 }

@@ -1,4 +1,4 @@
-package app.classes;
+package app.models;
 
 import lombok.Getter;
 
@@ -35,6 +35,13 @@ public class Section extends Element {
     @Override
     public Element get(int index) {
         return this.elementList.get(index);
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visitSection(this);
+        for (Element element : this.elementList) {
+            element.accept(visitor);
+        }
     }
 
     public void print() {

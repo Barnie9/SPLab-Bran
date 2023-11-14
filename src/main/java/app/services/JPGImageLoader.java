@@ -1,10 +1,12 @@
-package app.classes.images;
+package app.services;
 
-public class PNGImageLoader implements ImageLoader {
+import app.models.ImageContent;
+
+public class JPGImageLoader implements ImageLoader {
 
     private String url;
 
-    public PNGImageLoader(String url) {
+    public JPGImageLoader(String url) {
         this.url = url;
     }
 

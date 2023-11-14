@@ -1,4 +1,4 @@
-package app.classes.paragraphs;
+package app.services;
 
 public interface AlignStrategy {
 
