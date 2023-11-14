@@ -15,4 +15,5 @@ public abstract class Element {
     Element get(int index) {
         return null;
     }
+    abstract void accept(Visitor visitor);
 }

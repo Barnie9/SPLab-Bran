@@ -1,9 +1,11 @@
 package app.models;
 
 import app.services.AlignStrategy;
+import lombok.Getter;
 
 public class Paragraph extends Element {
 
+    @Getter
     private String text;
     private AlignStrategy alignStrategy;
 
@@ -14,6 +16,10 @@ public class Paragraph extends Element {
 
     public void setAlignStrategy(AlignStrategy alignStrategy) {
         this.alignStrategy = alignStrategy;
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visitParagraph(this);
     }
 
     public void print() {
