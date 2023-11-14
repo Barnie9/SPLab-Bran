@@ -1,11 +1,5 @@
 package app;
 
-import app.classes.*;
-import app.classes.images.ImageProxy;
-import app.classes.paragraphs.AlignCenter;
-import app.classes.paragraphs.AlignLeft;
-import app.classes.paragraphs.AlignRight;
-import app.classes.paragraphs.Paragraph;
 import app.components.SingletonComponent;
 import app.components.TransientComponent;
 import app.components.ClientComponent;

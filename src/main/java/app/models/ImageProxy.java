@@ -1,6 +1,4 @@
-package app.classes.images;
-
-import app.classes.Element;
+package app.models;
 
 public class ImageProxy extends Element implements Picture {
 

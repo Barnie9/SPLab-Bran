@@ -1,6 +1,6 @@
-package app.classes.images;
+package app.models;
 
-import app.classes.Element;
+import app.services.ImageLoaderFactory;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,4 +1,6 @@
-package app.classes.paragraphs;
+package app.services;
+
+import app.services.AlignStrategy;
 
 public class AlignCenter implements AlignStrategy {
 

@@ -1,4 +1,4 @@
-package app.classes;
+package app.models;
 
 public class Table extends Element {
 

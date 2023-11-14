@@ -1,6 +1,6 @@
-package app.classes.paragraphs;
+package app.models;
 
-import app.classes.Element;
+import app.services.AlignStrategy;
 
 public class Paragraph extends Element {
 

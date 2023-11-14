@@ -1,4 +1,4 @@
-package app.classes.images;
+package app.models;
 
 import lombok.Getter;
 
