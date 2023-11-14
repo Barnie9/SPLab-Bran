@@ -34,4 +34,9 @@ public class RenderContentVisitor implements Visitor {
     public void visitTable(Table table) {
         table.print();
     }
+
+    @Override
+    public void visitTableOfContent(TableOfContent tableOfContent) {
+        tableOfContent.print();
+    }
 }

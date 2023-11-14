@@ -8,4 +8,5 @@ public interface Visitor {
     void visitImageProxy(ImageProxy imageProxy);
     void visitImage(Image image);
     void visitTable(Table table);
+    void visitTableOfContent(TableOfContent tableOfContent);
 }
