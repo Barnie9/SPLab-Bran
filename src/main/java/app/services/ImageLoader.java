@@ -1,6 +1,6 @@
 package app.services;
 
-import app.models.ImageContent;
+import app.model.ImageContent;
 
 public interface ImageLoader {
 

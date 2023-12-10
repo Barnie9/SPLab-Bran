@@ -1,6 +1,6 @@
 package app.services;
 
-import app.models.*;
+import app.model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

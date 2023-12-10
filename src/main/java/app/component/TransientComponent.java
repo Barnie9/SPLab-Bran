@@ -1,4 +1,4 @@
-package app.components;
+package app.component;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

@@ -1,4 +1,4 @@
-package app.models;
+package app.model;
 
 import app.services.AlignStrategy;
 import lombok.Getter;
