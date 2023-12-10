@@ -28,6 +28,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.json:json:20230227'
+
+    compileOnly 'javax.servlet:servlet-api:2.5'
 }
 
 tasks.named('test') {

@@ -1,6 +1,6 @@
 package app.services;
 
-import app.models.*;
+import app.model.*;
 
 public class TableOfContentUpdate implements Visitor {
 
