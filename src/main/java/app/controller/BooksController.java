@@ -21,24 +21,22 @@ public class BooksController {
 
     BookService bookService;
     List<Request<?>> requests;
-    CommandExecutor commandExecutor;
+    CommandExecutor syncCommandExecutor;
+    CommandExecutor asyncCommandExecutor;
     ExecutorService executorService;
 
     public BooksController(BookService bookService) {
         this.bookService = bookService;
         this.requests = new ArrayList<>();
 
-        // this.commandExecutor = new SynchronousExecutor();
-        this.commandExecutor = new AsynchronousExecutor();
+        this.syncCommandExecutor = new SynchronousExecutor();
+        this.asyncCommandExecutor = new AsynchronousExecutor();
 
-        if (this.commandExecutor instanceof AsynchronousExecutor) {
-            this.executorService = Executors.newFixedThreadPool(2);
+        this.executorService = Executors.newFixedThreadPool(2);
 
-            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-            // Schedule the function to run every 1 second
-            scheduler.scheduleAtFixedRate(this::processRequests, 0, 10, TimeUnit.SECONDS);
-        }
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        // Schedule the function to run every 10 seconds
+        scheduler.scheduleAtFixedRate(this::processRequests, 0, 10, TimeUnit.SECONDS);
     }
 
     @GetMapping("/requests/{id}")
@@ -58,7 +56,7 @@ public class BooksController {
 
     @GetMapping("/books")
     public ResponseEntity<Integer> getBooks() {
-        Request request = commandExecutor.executeCommand(new GetBooksCmd(), bookService);
+        Request request = asyncCommandExecutor.executeCommand(new GetBooksCmd(), bookService);
         request.setId(requests.size());
 
         requests.add(request);
@@ -68,7 +66,7 @@ public class BooksController {
 
     @GetMapping("/books/{id}")
     public ResponseEntity<Integer> getBookById(@PathVariable int id) {
-        Request request = commandExecutor.executeCommand(new GetBookByIdCmd(id), bookService);
+        Request request = asyncCommandExecutor.executeCommand(new GetBookByIdCmd(id), bookService);
         request.setId(requests.size());
 
         requests.add(request);
@@ -78,7 +76,7 @@ public class BooksController {
 
     @PostMapping("/books")
     public ResponseEntity<Integer> createBook(@RequestBody Map<String, String> book) {
-        Request request = commandExecutor.executeCommand(new CreateBookCmd(book.get("title")), bookService);
+        Request request = asyncCommandExecutor.executeCommand(new CreateBookCmd(book.get("title")), bookService);
         request.setId(requests.size());
 
         requests.add(request);
@@ -88,7 +86,7 @@ public class BooksController {
 
     @PutMapping("/books/{id}")
     public ResponseEntity<Integer> updateBook(@PathVariable int id, @RequestBody Map<String, String> book) {
-        Request request = commandExecutor.executeCommand(new UpdateBookCmd(id, book.get("title")), bookService);
+        Request request = asyncCommandExecutor.executeCommand(new UpdateBookCmd(id, book.get("title")), bookService);
         request.setId(requests.size());
 
         requests.add(request);
@@ -98,7 +96,7 @@ public class BooksController {
 
     @DeleteMapping("/books/{id}")
     public ResponseEntity<Integer> deleteBook(@PathVariable int id) {
-        Request request = commandExecutor.executeCommand(new DeleteBookCmd(id), bookService);
+        Request request = asyncCommandExecutor.executeCommand(new DeleteBookCmd(id), bookService);
         request.setId(requests.size());
 
         requests.add(request);
