@@ -3,7 +3,6 @@ package app.controller;
 import app.command.*;
 import app.model.*;
 import app.service.BookService;
-import app.service.impl.BookServiceImpl;
 import app.services.BookStatistics;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,45 +11,116 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class BooksController {
 
-    BookService bookService = new BookServiceImpl();
+    BookService bookService;
+    List<Request<?>> requests;
+    CommandExecutor commandExecutor;
+    ExecutorService executorService;
+
+    public BooksController(BookService bookService) {
+        this.bookService = bookService;
+        this.requests = new ArrayList<>();
+
+        // this.commandExecutor = new SynchronousExecutor();
+        this.commandExecutor = new AsynchronousExecutor();
+
+        if (this.commandExecutor instanceof AsynchronousExecutor) {
+            this.executorService = Executors.newFixedThreadPool(2);
+
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+            // Schedule the function to run every 1 second
+            scheduler.scheduleAtFixedRate(this::processRequests, 0, 10, TimeUnit.SECONDS);
+        }
+    }
+
+    @GetMapping("/requests/{id}")
+    public ResponseEntity<?> getRequest(@PathVariable int id) {
+        if (id >= requests.size()) {
+            return new ResponseEntity<>("Request not found", HttpStatus.NOT_FOUND);
+        }
+
+        Request request = requests.get(id);
+
+        if (request.isCompleted()) {
+            return new ResponseEntity<>(request.getResult(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Request not completed", HttpStatus.OK);
+    }
 
     @GetMapping("/books")
-    public List<Book> getBooks() {
-        GetBooksCmd getBooksCmd = new GetBooksCmd();
+    public ResponseEntity<Integer> getBooks() {
+        Request request = commandExecutor.executeCommand(new GetBooksCmd(), bookService);
+        request.setId(requests.size());
 
-        return getBooksCmd.execute(bookService);
+        requests.add(request);
+
+        return new ResponseEntity<>(requests.size() - 1, HttpStatus.OK);
     }
 
     @GetMapping("/books/{id}")
-    public Book getBookById(@PathVariable int id) {
-        GetBookByIdCmd getBookByIdCmd = new GetBookByIdCmd(id);
+    public ResponseEntity<Integer> getBookById(@PathVariable int id) {
+        Request request = commandExecutor.executeCommand(new GetBookByIdCmd(id), bookService);
+        request.setId(requests.size());
 
-        return getBookByIdCmd.execute(bookService);
+        requests.add(request);
+
+        return new ResponseEntity<>(requests.size() - 1, HttpStatus.OK);
     }
 
     @PostMapping("/books")
-    public Book createBook(@RequestBody Map<String, String> book) {
-        CreateBookCmd createBookCmd = new CreateBookCmd(book.get("title"));
+    public ResponseEntity<Integer> createBook(@RequestBody Map<String, String> book) {
+        Request request = commandExecutor.executeCommand(new CreateBookCmd(book.get("title")), bookService);
+        request.setId(requests.size());
 
-        return createBookCmd.execute(bookService);
+        requests.add(request);
+
+        return new ResponseEntity<>(requests.size() - 1, HttpStatus.OK);
     }
 
     @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable int id, @RequestBody Map<String, String> book) {
-        UpdateBookCmd updateBookCmd = new UpdateBookCmd(id, book.get("title"));
+    public ResponseEntity<Integer> updateBook(@PathVariable int id, @RequestBody Map<String, String> book) {
+        Request request = commandExecutor.executeCommand(new UpdateBookCmd(id, book.get("title")), bookService);
+        request.setId(requests.size());
 
-        return updateBookCmd.execute(bookService);
+        requests.add(request);
+
+        return new ResponseEntity<>(requests.size() - 1, HttpStatus.OK);
     }
 
     @DeleteMapping("/books/{id}")
-    public Book deleteBook(@PathVariable int id) {
-        DeleteBookCmd deleteBookCmd = new DeleteBookCmd(id);
+    public ResponseEntity<Integer> deleteBook(@PathVariable int id) {
+        Request request = commandExecutor.executeCommand(new DeleteBookCmd(id), bookService);
+        request.setId(requests.size());
 
-        return deleteBookCmd.execute(bookService);
+        requests.add(request);
+
+        return new ResponseEntity<>(requests.size() - 1, HttpStatus.OK);
+    }
+
+    public void processRequests() {
+        System.out.println("Processing requests");
+
+        for (Request request : requests) {
+            if (!request.isCompleted()) {
+                executorService.submit(() -> {
+                    System.out.println("Executing request " + request.getId());
+
+                    request.setResult(request.getCommand().execute(bookService));
+                    request.setCompleted(true);
+
+                    System.out.println("Request " + request.getId() + " completed");
+                });
+            }
+        }
     }
 
     @GetMapping("/statistics")
