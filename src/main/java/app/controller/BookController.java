@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.command.*;
+import app.entity.BookAuthor;
 import app.model.*;
 import app.service.BookService;
 import app.services.BookStatistics;
@@ -102,6 +103,11 @@ public class BookController {
         requests.add(request);
 
         return new ResponseEntity<>(requests.size() - 1, HttpStatus.OK);
+    }
+
+    @PostMapping("/books/{bookId}/authors/{authorId}")
+    public ResponseEntity<BookAuthor> addAuthor(@PathVariable int bookId, @PathVariable int authorId) {
+        return new ResponseEntity<>(bookService.addAuthor(bookId, authorId), HttpStatus.OK);
     }
 
     public void processRequests() {

@@ -14,7 +14,4 @@ public class Author {
 
     @Column
     private String name;
-
-    @OneToMany(mappedBy = "author")
-    private List<BookAuthor> bookAuthors;
 }
