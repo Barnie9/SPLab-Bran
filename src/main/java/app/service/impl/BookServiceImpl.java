@@ -1,6 +1,7 @@
 package app.service.impl;
 
-import app.model.Book;
+import app.entity.Book;
+import app.repository.BookRepository;
 import app.service.BookService;
 import org.springframework.stereotype.Service;
 
@@ -10,32 +11,40 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
-    List<Book> books = new ArrayList<>();
+    private final BookRepository bookRepository;
+
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public Book getBookById(int id) {
-        return books.get(id);
+        return bookRepository.getReferenceById(id);
     }
 
     @Override
     public List<Book> getBooks() {
-        return books;
+        return bookRepository.findAll();
     }
 
     @Override
-    public Book createBook(Book book) {
-        books.add(book);
-        return books.get(books.size() - 1);
+    public Book createBook(String title) {
+        Book book = new Book();
+        book.setTitle(title);
+        return bookRepository.save(book);
     }
 
     @Override
-    public Book updateBook(Book book, int id) {
-        books.set(id, book);
-        return books.get(id);
+    public Book updateBook(String title, int id) {
+        Book bookToUpdate = bookRepository.getReferenceById(id);
+        bookToUpdate.setTitle(title);
+        return bookRepository.save(bookToUpdate);
     }
 
     @Override
     public Book deleteBook(int id) {
-        return books.remove(id);
+        Book bookToDelete = bookRepository.getReferenceById(id);
+        bookRepository.delete(bookToDelete);
+        return bookToDelete;
     }
 }

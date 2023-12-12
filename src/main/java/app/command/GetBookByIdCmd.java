@@ -1,6 +1,6 @@
 package app.command;
 
-import app.model.Book;
+import app.entity.Book;
 import app.service.BookService;
 import lombok.AllArgsConstructor;
 

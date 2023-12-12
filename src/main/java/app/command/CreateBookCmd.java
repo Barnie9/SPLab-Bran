@@ -1,6 +1,6 @@
 package app.command;
 
-import app.model.Book;
+import app.entity.Book;
 import app.service.BookService;
 import lombok.AllArgsConstructor;
 
@@ -10,6 +10,6 @@ public class CreateBookCmd implements Command {
 
     @Override
     public Book execute(BookService bookService) {
-        return bookService.createBook(new Book(title));
+        return bookService.createBook(title);
     }
 }
