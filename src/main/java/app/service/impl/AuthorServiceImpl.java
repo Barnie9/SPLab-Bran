@@ -2,19 +2,22 @@ package app.service.impl;
 
 import app.entity.Author;
 import app.repository.AuthorRepository;
+import app.repository.CrudRepository;
+import app.repository.CrudRepositoryAdapter;
 import app.service.AuthorService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
+//    private final CrudRepository<Author, Integer> authorRepository;
 
     @Override
     public Author getAuthorById(int id) {
