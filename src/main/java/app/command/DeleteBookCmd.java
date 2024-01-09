@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class DeleteBookCmd implements Command {
-    private int id;
+    private Long id;
 
     @Override
     public Book execute(BookService bookService) {

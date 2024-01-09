@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UpdateBookCmd implements Command {
 
-    private int id;
+    private Long id;
     private String title;
 
     @Override

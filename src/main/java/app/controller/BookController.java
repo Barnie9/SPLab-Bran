@@ -66,7 +66,7 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}")
-    public ResponseEntity<Integer> getBookById(@PathVariable int id) {
+    public ResponseEntity<Integer> getBookById(@PathVariable Long id) {
         Request request = syncCommandExecutor.executeCommand(new GetBookByIdCmd(id), bookService);
         request.setId(requests.size());
 
@@ -86,7 +86,7 @@ public class BookController {
     }
 
     @PutMapping("/books/{id}")
-    public ResponseEntity<Integer> updateBook(@PathVariable int id, @RequestBody Map<String, String> book) {
+    public ResponseEntity<Integer> updateBook(@PathVariable Long id, @RequestBody Map<String, String> book) {
         Request request = syncCommandExecutor.executeCommand(new UpdateBookCmd(id, book.get("title")), bookService);
         request.setId(requests.size());
 
@@ -96,7 +96,7 @@ public class BookController {
     }
 
     @DeleteMapping("/books/{id}")
-    public ResponseEntity<Integer> deleteBook(@PathVariable int id) {
+    public ResponseEntity<Integer> deleteBook(@PathVariable Long id) {
         Request request = syncCommandExecutor.executeCommand(new DeleteBookCmd(id), bookService);
         request.setId(requests.size());
 
@@ -106,7 +106,7 @@ public class BookController {
     }
 
     @PostMapping("/books/{bookId}/authors/{authorId}")
-    public ResponseEntity<BookAuthor> addAuthor(@PathVariable int bookId, @PathVariable int authorId) {
+    public ResponseEntity<BookAuthor> addAuthor(@PathVariable Long bookId, @PathVariable Integer authorId) {
         return new ResponseEntity<>(bookService.addAuthor(bookId, authorId), HttpStatus.OK);
     }
 

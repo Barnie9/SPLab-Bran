@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class GetBookByIdCmd implements Command {
-    private int id;
+    private Long id;
 
     @Override
     public Book execute(BookService bookService) {
